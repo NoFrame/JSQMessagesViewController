@@ -40,6 +40,7 @@
     self = [super init];
     if (self) {
         _image = [image copy];
+        _imageURL = nil;
         _cachedImageView = nil;
     }
     return self;
@@ -49,6 +50,7 @@
 {
     self = [super init];
     if (self) {
+        _image = nil;
         _imageURL = [imageURL copy];
         _cachedImageView = nil;
     }
@@ -96,7 +98,12 @@
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
         
-        [imageView setImageWithURL:self.imageURL usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        if (image) {
+            imageView.image = image;
+        }
+        else {
+            [imageView setImageWithURL:self.imageURL usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        }
 
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
         self.cachedImageView = imageView;
