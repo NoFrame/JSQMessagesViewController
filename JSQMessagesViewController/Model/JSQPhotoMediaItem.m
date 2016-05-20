@@ -21,7 +21,7 @@
 #import "JSQMessagesMediaPlaceholderView.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 
-#import <UIActivityIndicator-for-SDWebImage.h>
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 
 
 @interface JSQPhotoMediaItem ()
