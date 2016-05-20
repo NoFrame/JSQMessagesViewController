@@ -98,8 +98,8 @@
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
         
-        if (image) {
-            imageView.image = image;
+        if (self.image) {
+            imageView.image = self.image;
         }
         else {
             [imageView setImageWithURL:self.imageURL usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
