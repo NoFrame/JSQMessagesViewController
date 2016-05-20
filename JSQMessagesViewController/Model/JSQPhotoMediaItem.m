@@ -21,6 +21,8 @@
 #import "JSQMessagesMediaPlaceholderView.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 
+#import <UIActivityIndicator-for-SDWebImage.h>
+
 
 @interface JSQPhotoMediaItem ()
 
@@ -43,6 +45,16 @@
     return self;
 }
 
+- (instancetype)initWithImageURL:(NSURL *)imageURL
+{
+    self = [super init];
+    if (self) {
+        _imageURL = [imageURL copy];
+        _cachedImageView = nil;
+    }
+    return self;
+}
+
 - (void)clearCachedMediaViews
 {
     [super clearCachedMediaViews];
@@ -57,6 +69,13 @@
     _cachedImageView = nil;
 }
 
+- (void)setImageURL:(NSURL *)imageURL
+{
+    _image = nil;
+    _imageURL = [imageURL copy];
+    _cachedImageView = nil;
+}
+
 - (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing
 {
     [super setAppliesMediaViewMaskAsOutgoing:appliesMediaViewMaskAsOutgoing];
@@ -67,16 +86,18 @@
 
 - (UIView *)mediaView
 {
-    if (self.image == nil) {
+    if (!self.image && !self.imageURL) {
         return nil;
     }
     
     if (self.cachedImageView == nil) {
         CGSize size = [self mediaViewDisplaySize];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:self.image];
-        imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, size.height)];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
+        
+        [imageView setImageWithURL:self.imageURL usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
         self.cachedImageView = imageView;
     }
@@ -109,6 +130,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         _image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
+        _imageURL = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(imageURL))];
     }
     return self;
 }
@@ -117,13 +139,17 @@
 {
     [super encodeWithCoder:aCoder];
     [aCoder encodeObject:self.image forKey:NSStringFromSelector(@selector(image))];
+    [aCoder encodeObject:self.imageURL forKey:NSStringFromSelector(@selector(imageURL))];
 }
 
 #pragma mark - NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone
 {
-    JSQPhotoMediaItem *copy = [[JSQPhotoMediaItem allocWithZone:zone] initWithImage:self.image];
+    JSQPhotoMediaItem *copy = [[JSQPhotoMediaItem allocWithZone:zone] init];
+    copy.image = self.image;
+    copy.imageURL = self.imageURL;
+    _cachedImageView = nil;
     copy.appliesMediaViewMaskAsOutgoing = self.appliesMediaViewMaskAsOutgoing;
     return copy;
 }
