@@ -30,6 +30,7 @@
  *  The image for the photo media item. The default value is `nil`.
  */
 @property (copy, nonatomic) UIImage *image;
+@property (copy, nonatomic) NSURL *imageURL;
 
 /**
  *  Initializes and returns a photo media item object having the given image.
@@ -43,5 +44,6 @@
  *  Once the image has been retrieved, you can then set the image property.
  */
 - (instancetype)initWithImage:(UIImage *)image;
+- (instancetype)initWithImageURL:(NSURL *)imageURL;
 
 @end

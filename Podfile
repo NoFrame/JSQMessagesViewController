@@ -6,7 +6,8 @@ platform :ios, '7.0'
 inhibit_all_warnings!
 
 pod 'JSQSystemSoundPlayer', '~> 2.0'
+pod 'UIActivityIndicator-for-SDWebImage', '~> 1.2'
 
-target :JSQMessagesTests, :exclusive => true do
+target :JSQMessagesTests do
    pod 'JSQSystemSoundPlayer', '~> 2.0'
 end
