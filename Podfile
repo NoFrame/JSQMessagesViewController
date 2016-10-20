@@ -1,13 +1,18 @@
 source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/NoFrame/CocoapodsSpecs.git'
 
-platform :ios, '7.0'
+platform :ios, '8.1'
 
-# ignore all warnings from all pods
-inhibit_all_warnings!
-
-pod 'JSQSystemSoundPlayer', '~> 2.0'
-pod 'UIActivityIndicator-for-SDWebImage', '~> 1.2'
-
-target :JSQMessagesTests do
-   pod 'JSQSystemSoundPlayer', '~> 2.0'
+use_frameworks!
+target 'JSQMessages' do
+    pod 'JSQMessagesViewController'
+    
+    pod 'JSQSystemSoundPlayer', '~> 2.0'
+    pod 'UIActivityIndicator-for-SDWebImage', '~> 1.2.1'
+    
+    target 'JSQMessagesTests' do
+        inherit! :search_paths
+        
+        pod 'JSQSystemSoundPlayer', '~> 2.0'
+    end
 end

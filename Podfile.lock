@@ -1,20 +1,24 @@
 PODS:
+  - JSQMessagesViewController (7.3.4):
+    - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
-  - SDWebImage (3.7.6):
-    - SDWebImage/Core (= 3.7.6)
-  - SDWebImage/Core (3.7.6)
-  - UIActivityIndicator-for-SDWebImage (1.2):
-    - SDWebImage (~> 3.7)
+  - SDWebImage (4.0.0-beta2-farmis-0.3):
+    - SDWebImage/Core (= 4.0.0-beta2-farmis-0.3)
+  - SDWebImage/Core (4.0.0-beta2-farmis-0.3)
+  - UIActivityIndicator-for-SDWebImage (1.2.1):
+    - SDWebImage (~> 4.0.0-beta2-farmis-0.3)
 
 DEPENDENCIES:
+  - JSQMessagesViewController
   - JSQSystemSoundPlayer (~> 2.0)
-  - UIActivityIndicator-for-SDWebImage (~> 1.2)
+  - UIActivityIndicator-for-SDWebImage (~> 1.2.1)
 
 SPEC CHECKSUMS:
+  JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
-  UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
+  SDWebImage: d7bbbf81319b89f46e8fce6a85706b798b46e9f0
+  UIActivityIndicator-for-SDWebImage: a2c5f0a2016e5fe9286f21e4dc0a3ca62dee8d5b
 
-PODFILE CHECKSUM: 919841dd630aa94e70968b92c4d7e89bf679c8b4
+PODFILE CHECKSUM: 25fa46154fa6caa44e043dc8846d12e0fcb77a2e
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.1.0.rc.3
